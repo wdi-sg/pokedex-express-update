@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit pokemon</title>
+</head>
+<body>
+    <form method="POST" action="/{{pokemon.id}}?_method=PUT">
+        <label for="id">Id: </label><input type="number" name="id" value="{{pokemon.id}}"><br>
+        <label for="num">Num: </label><input type="text" name="num" value="{{pokemon.num}}"><br>
+        <label for="name">Name: </label><input type="text" name="name" value="{{pokemon.name}}"><br>
+        <label for="img">Image: </label><input type="text" name="img" value="{{pokemon.img}}"><br>
+        <label for="height">Height: </label><input type="text" name="height" value="{{pokemon.height}}"><br>
+        <label for="weight">Weight: </label><input type="text" name="weight" value="{{pokemon.weight}}"><br>
+        <label for="candy">Candy: </label><input type="text" name="candy" value="{{pokemon.candy}}"><br>
+        <label for="candy_count">Candy Count: </label><input type="candy_count" name="candy_count" value="{{pokemon.candy_count}}"><br>
+        <label for="egg">Egg: </label><input type="text" name="egg" value="{{pokemon.egg}}"><br>
+        <label for="avg_spawns">Average Spawns: </label><input type="text" name="avg_spawns" value="{{pokemon.avg_spawns}}"><br>
+        <label for="spawn_time">Spawn Time: </label><input type="text" name="spawn_time" value="{{pokemon.spawn_time}}"><br>
+        <input type="submit" name="submit" value="Save">
+    </form>
+</body>
+</html>
