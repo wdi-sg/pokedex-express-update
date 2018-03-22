@@ -44,7 +44,9 @@ app.use(methodOverride('_method'));
        // Try to match with the id specified in the url parameters
        if (currentPokemon_id === parseInt(delete_id, 10)){
          // Delete the specified pokemon from the pokedex
-         obj.pokemon.splice(delete_id, 1);
+         let actual_delete_id = delete_id - 1;
+         console.log("Actual array index to delete => " + actual_delete_id);
+         obj.pokemon.splice(actual_delete_id, 1);
 
          console.log("Successfully deleted the pokemon from the pokedex");
        }
@@ -146,7 +148,8 @@ app.get('/:id', (request, response) => {
     } else {
       // return pokemon HTML page if found
       let context = {
-        pokemon: pokemon
+        pokemon: pokemon,
+        currentPokemonId: pokemon.id
       };
 
       response.render('pokemon', context);
