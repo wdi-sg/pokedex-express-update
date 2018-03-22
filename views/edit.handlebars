@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokemon</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <form class="pokemon-form" method="POST" action="/{{pokemon.id}}?_method=PUT">
+    <div class="pokemon-attribute">
+      id: {{pokemon.id}}
+    </div>
+    <div class="pokemon-attribute">
+      num:<input name="num" type="text" value="{{pokemon.num}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      name:<input name="name" type="text" value="{{pokemon.name}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      img:<input name="img" type="text" value="{{pokemon.img}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      height:<input name="height" type="text" value="{{pokemon.height}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      weight:<input name="weight" type="text" value="{{pokemon.weight}}"/>
+    </div>
+    <input name="submit" type="submit"/>
+  </form>
+
+
+  <form class="pokemon-form" method="POST" action="/{{pokemon.id}}?_method=DELETE">
+    <button type="submit">Delete Pokemon</button>
+  </form>
+</body>
+</html>
