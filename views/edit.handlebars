@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon</title>
+</head>
+
+<body>
+
+    <form class="editPokemonForm" method="POST" action="/{{pokemon.id}}?_method=PUT">
+        <div class="pokemon-attribute">
+            id:
+            <input name="id" type="text" value="{{pokemon.id}}" />
+        </div>
+        <div class="pokemon-attribute">
+            num:
+            <input name="num" type="text" value="{{pokemon.num}}" />
+        </div>
+        <div class="pokemon-attribute">
+            name:
+            <input name="name" type="text" value="{{pokemon.name}}" />
+        </div>
+        <div class="pokemon-attribute">
+            img:
+            <input name="img" type="text" value="{{pokemon.img}}" />
+        </div>
+        <div class="pokemon-attribute">
+            height:
+            <input name="height" type="text" value="{{pokemon.height}}" />
+        </div>
+        <div class="pokemon-attribute">
+            weight:
+            <input name="weight" type="text" value="{{pokemon.weight}}" />
+        </div>
+        <div class="pokemon-attribute">
+            candy:
+            <input name="candy" type="text" value="{{pokemon.candy}}" />
+        </div>
+        <div class="pokemon-attribute">
+            candy_count:
+            <input name="candy_count" type="text" value="{{pokemon.candy_count}}" />
+        </div>
+        <div class="pokemon-attribute">
+            egg:
+            <input name="egg" type="text" value="{{pokemon.egg}}" />
+        </div>
+        <div class="pokemon-attribute">
+            avg_spawns:
+            <input name="avg_spawns" type="text" value="{{pokemon.avg_spawns}}" />
+        </div>
+        <div class="pokemon-attribute">
+            spawn_time:
+            <input name="spawn_time" type="text" value="{{pokemon.spawn_time}}" />
+        </div>
+        <input name="submit" type="submit" />
+    </form>
+    
+</body>
+
+</html>
