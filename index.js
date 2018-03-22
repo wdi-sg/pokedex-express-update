@@ -34,7 +34,7 @@ app.use(methodOverride('_method'));
    console.log("Entered the delete function");
    jsonfile.readFile(FILE, (err, obj) => {
      // Retrieve the id of the pokemon to be deleted
-     let delete_id = request.query.id;
+     let delete_id = request.params.id;
      console.log("Id of pokemon to be deleted => " + delete_id);
 
      for (let i = 0; i < obj.pokemon.length; i++){
@@ -55,7 +55,7 @@ app.use(methodOverride('_method'));
        console.log("Writing to file in progress");
        if (err2) console.error(err2);
 
-       // redirect to homepage
+       // redirect to homepage to display updated pokemon list
        response.redirect('/');
      });
    });
@@ -73,11 +73,9 @@ app.put('/:id', (request, response) => {
     if (err) console.error(err);
 
     // attempt to retrieve the requested pokemon
-    let inputId = request.body.id;
+    let inputId = request.params.id;
     console.log("id of updated pokemon => " + inputId);
-    console.log("type of inputId => " + typeof(inputId));
     let updated_Pokemon = request.body;
-    console.log("Contentof updated pokemon => " + updated_Pokemon);
 
     for (let i = 0; i < obj.pokemon.length; i++) {
       // Get the actual id of the current pokemon
@@ -101,7 +99,7 @@ app.put('/:id', (request, response) => {
       if (err2) console.error(err2);
 
       // redirect to GET /:id
-      response.redirect('/' + request.body.id);
+      response.redirect('/' + request.params.id);
     });
   });
 });
