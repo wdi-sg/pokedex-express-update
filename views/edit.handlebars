@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokedex</title>
+</head>
+<body>
+  <h1>Edit Pokemon {{id}}</h1>
+  <form class="pokemon-form" method="POST" action="/{{pokemon.id}}?_method=PUT">
+    <div class="pokemon-attribute">
+      name:<input value={{pokemon.name}} name="name" type="text"/>
+    </div>
+    <div class="pokemon-attribute">
+      img:<input value={{pokemon.img}} name="img" type="text"/>
+    </div>
+    <div class="pokemon-attribute">
+      height:<input value={{pokemon.height}} name="height" type="text"/>
+    </div>
+    <div class="pokemon-attribute">
+      weight:<input value={{pokemon.weight}} name="weight" type="text"/>
+    </div>
+    <input name="submit" type="submit"/>
+  </form>
+  <!-- <form method="GET" action="/">
+  <button value="name" name="edit">Edit name</button>
+  <button value="id" name="edit">Edit id</button>
+  </form> -->
+</body>
+</html>
