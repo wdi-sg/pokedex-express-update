@@ -85,6 +85,65 @@ app.post('/', (request, response) => {
   });
 });
 
+app.get('/:id/edit', (req, res) => {
+  let id = req.params.id;
+  jsonfile.readFile(FILE, (err, obj) => {
+    let pokemon = obj.pokemon.find((currentPokemon) => {
+      return currentPokemon.id === parseInt(id);
+    });
+
+    let context = {
+      pokemon: pokemon
+    }
+    // console.log(context);
+    res.render("edit", context);
+  });
+
+});
+
+app.put('/:id', (req, res) => {
+  let id = req.params.id;
+  console.log("id: ", id);
+  jsonfile.readFile(FILE, (err, obj) => {
+    // console.log("read");
+    let pokemonIndex = obj.pokemon.findIndex((currentPokemon) => {
+      return currentPokemon.id === parseInt(id);
+    });
+    // console.log(pokemonIndex);
+    req.body["id"] = parseInt(id);
+    obj.pokemon[pokemonIndex] = req.body;
+    // console.log(obj.pokemon[pokemonIndex]);
+    jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+      // console.log("written");
+
+      res.redirect("/" + id);
+    });
+  });
+});
+
+app.delete('/:id', (req, res) => {
+  let id = req.params.id;
+  console.log("id: ", id);
+  jsonfile.readFile(FILE, (err, obj) => {
+    // console.log("read");
+    let pokemonIndex = obj.pokemon.findIndex((currentPokemon) => {
+      return currentPokemon.id === parseInt(id);
+    });
+    obj.pokemon.splice(pokemonIndex, 1);
+    // console.log(obj.pokemon[pokemonIndex]);
+    jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+      console.log("deleted");
+
+      res.redirect("/");
+    });
+  });
+
+});
+
+
+
 /**
  * ===================================
  * Listen to requests on port 3000
