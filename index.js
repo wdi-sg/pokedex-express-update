@@ -24,7 +24,6 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-let router = express.Router();
 /**
  * ===================================
  * Routes
