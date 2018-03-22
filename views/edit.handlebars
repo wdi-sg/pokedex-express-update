@@ -1,0 +1,13 @@
+<form action="/{{pokemon.id}}" method="post">
+  <label>ID:</label>
+  <p>{{pokemon.id}}</p>
+  <label>Name:</label>
+  <input type="text" name="name" value={{pokemon.name}}>
+  <label>Image:</label>
+  <input type="text" name="img">
+  <label>Height:</label>
+  <input type="text" name="height" value={{pokemon.height}}>
+  <label>Weight:</label>
+  <input type="text" name="weight" value={{pokemon.weight}}>
+  <input type="submit" value="Submit">
+</form>
