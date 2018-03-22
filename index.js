@@ -29,14 +29,36 @@ app.use(methodOverride('_method'));
  * Routes
  * ===================================
  */
-app.get('/new', (request, response) => {
+ app.get('/new', (request, response) => {
   // send response with some data (a HTML file)
   response.render('new');
 });
 
-app.get('/:id', (request, response) => {
+app.get('/:id/edit', (request, response) => {
   jsonfile.readFile(FILE, (err, obj) => {
-    if (err) console.error(err);
+    let inputId = request.params.id;
+    let pokemon = obj.pokemon.find((currentPokemon) => {
+      return currentPokemon.id === parseInt(inputId,10);
+    });
+
+    if (pokemon === undefined) {
+
+      response.render('404');
+    }
+    else {
+
+      let context = {
+        pokemon: pokemon
+      };
+      response.render('edit', context)
+    }
+  });
+  });
+
+
+  app.get('/:id', (request, response) => {
+    jsonfile.readFile(FILE, (err, obj) => {
+      if (err) console.error(err);
 
     // attempt to retrieve the requested pokemon
     let inputId = request.params.id;
@@ -56,11 +78,11 @@ app.get('/:id', (request, response) => {
       response.render('pokemon', context);
     }
   });
-});
+  });
 
-app.get('/', (request, response) => {
-  jsonfile.readFile(FILE, (err, obj) => {
-    if (err) console.error(err);
+  app.get('/', (request, response) => {
+    jsonfile.readFile(FILE, (err, obj) => {
+      if (err) console.error(err);
 
     // return home HTML page with all pokemon
     response.render('home', { pokemon: obj.pokemon });
@@ -83,11 +105,67 @@ app.post('/', (request, response) => {
       response.render('home', { pokemon: obj.pokemon });
     });
   });
-});
+  });
+
+  app.put('/:id', (request, response) => {
+    jsonfile.readFile(FILE, (err, obj) => {
+      if (err) console.error(err);
+
+    // attempt to retrieve the requested pokemon
+    let inputId = request.params.id;
+    let updatedPokemon = request.body;
+
+    for (let i = 0; i < obj.pokemon.length; i++) {
+      let currentPokemon = obj.pokemon[i];
+
+      if (currentPokemon.id === parseInt(inputId, 10)) {
+        // convert input id from string to number before saving
+        updatedPokemon.id = parseInt(updatedPokemon.id, 10);
+
+        // update pokedex object
+        obj.pokemon[i] = updatedPokemon;
+      }
+    }
+
+    // save pokedex object in pokedex.json file
+    jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+
+      // redirect to GET /:id
+      response.redirect(`/${request.params.id}`);
+    });
+  });
+  });
+
+  app.delete('/:id', (request, response) => {
+
+
+    jsonfile.readFile(FILE, (err, obj)=> {
+      for(let i=0; i < obj.pokemon.length; i++){
+
+        let currentPokemon = obj.pokemon[i];
+        if(currentPokemon.id = request.params.id);
+
+      //this is the thing we wan to delete
+      obj.pokemon.splice(i,1);
+    }
+
+    jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+
+
+      response.redirect('/');
+    });
+
+  });
+
+  });
+
+
 
 /**
  * ===================================
  * Listen to requests on port 3000
  * ===================================
  */
-app.listen(3000, () => console.log('~~~ Tuning in to the waves of port 3000 ~~~'));
+ app.listen(3000, () => console.log('~~~ Tuning in to the waves of port 3000 ~~~'));
