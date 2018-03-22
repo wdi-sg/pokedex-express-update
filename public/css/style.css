@@ -1,3 +1,10 @@
+
 .pokemon-attribute {
   margin-top: 5px;
+}
+
+form{
+  width: 90vh;
+  margin-left: 50px;
+  margin-top: 50px;
 }
