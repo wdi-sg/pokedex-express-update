@@ -7,7 +7,9 @@
 <body>
   <h1>Welcome to the online Pokedex!</h1>
   {{#each pokemon}}
-    <li>{{this.name}}</li>
+    <form method="POST" action="/resource?_method=DELETE">
+      <li>{{this.name}} <button type="submit" name="id" value="{{this.id}}">Delete</button></li>
+    </form>
   {{/each}}
 </body>
 </html>

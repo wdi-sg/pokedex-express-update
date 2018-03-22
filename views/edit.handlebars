@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokedex</title>
+</head>
+<body>
+  <h1>Edit {{pokemon.name}}</h1>
+  <form method="POST" action="/{{pokemon.id}}resource?_method=PUT">
+    {{#each pokemon}}
+    {{@key}}:
+    <input type="text" name="{{@key}}" value="{{this}}"><br>
+    {{/each}}
+    <input type="submit" value="Update">
+  </form>
+</body>
+</html>
