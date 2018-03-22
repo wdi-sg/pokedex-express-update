@@ -58,6 +58,7 @@ app.get('/:id/edit', (request, response) => {
   });
 });
 
+// Q3)
 app.put('/:id', updatePokemon);
 
 function updatePokemon(request, response) {
@@ -77,6 +78,20 @@ function updatePokemon(request, response) {
     }
   });
 };
+
+// Q4)
+// app.delete('/:id', deletePokemon);
+
+// function deletePokemon(request, response) {
+//   console.log(request.body);
+//   jsonfile.readFile(FILE, (err,obj) => {
+//     for ( let i = 0; i < obj.pokemon.length; i++ ){
+//       if (request.params.id == obj.pokemon[i].id) {
+
+//       }
+//     }
+//   })
+// }
 
 app.get('/new', (request, response) => {
   // send response with some data (a HTML file)
