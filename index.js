@@ -154,21 +154,22 @@ app.put('/:id', (request,response) =>{
 });
 
 app.delete('/:id', (request,response) => {
-  console.log('test');
   jsonfile.readFile(FILE,(err,obj) => {
-    console.log('test');
     const pokeArray = obj.pokemon;
     let input = request.params.id;
 
     for(let i=0; i<pokeArray.length;i++){
       if(pokeArray[i].id === parseInt(input,10)){
-        console.log(pokeArray[i]);
+        console.log("before deletion: " + pokeArray[i]);
         pokeArray.splice(i,1);
-        console.log(pokeArray[i]);
+        console.log("after deletion: " + pokeArray[i]);
       }
     }
 
-    response.render('home',{ pokemon: obj.pokemon });
+    jsonfile.writeFile(FILE,obj,{spaces: 2},(err2) => {
+      //redirect to the id page
+      response.render('home',{ pokemon: obj.pokemon });
+    });
   })
 });
 
