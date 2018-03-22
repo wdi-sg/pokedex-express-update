@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokemon</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <form class="pokemon-form" method="POST" action="/{{getPokemon.id}}?_method=PUT">
+      id:<input name="id" type="text" placeholder = {{getPokemon.id}}>
+      <br>
+      num:<input name="num" type="text" placeholder = {{getPokemon.num}}>
+      <br>
+      name:<input name="name" type="text" placeholder = {{getPokemon.name}}>
+      <br>
+      img:<input name="img" type="text" placeholder = {{getPokemon.img}}>
+      <br>
+      height:<input name="height" type="text" placeholder = {{getPokemon.height}}>
+      <br>
+      weight:<input name="weight" type="text" placeholder = {{getPokemon.weight}}>
+      <br>
+      candy:<input name="candy" type="text" placeholder = {{getPokemon.candy}}>
+      <br>
+      candy_count:<input name="candy_count" type="text" placeholder = {{getPokemon.candy_count}}>
+      <br>
+      egg:<input name="egg" type="text" placeholder = {{getPokemon.egg}}>
+      <br>
+      avg_spawns:<input name="avg_spawns" type="text" placeholder = {{getPokemon.avg_spawns}}>
+      <br>
+      spawn_time:<input name="spawn_time" type="text" placeholder = {{getPokemon.spawn_time}}>
+      <br>
+    <input name="submit" type="submit"/>
+  </form>
+</body>
+</html>

@@ -24,6 +24,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+let router = express.Router();
 /**
  * ===================================
  * Routes
@@ -32,6 +33,23 @@ app.use(methodOverride('_method'));
 app.get('/new', (request, response) => {
   // send response with some data (a HTML file)
   response.render('new');
+});
+
+app.get('/:id/edit',(request,response) => {
+  jsonfile.readFile(FILE, (err,obj) => {
+    const input = request.params.id;
+    console.log("inputted:" + input);
+    const pokeArray = obj.pokemon;
+    for(let i=0; i<pokeArray.length; i++){
+      if(pokeArray[i].id == input){
+        let context = {
+          getPokemon : pokeArray[i]
+        }
+        console.log(context);
+        response.render('edit',context);
+      }
+    }
+  })
 });
 
 app.get('/:id', (request, response) => {
@@ -84,6 +102,69 @@ app.post('/', (request, response) => {
     });
   });
 });
+
+app.put('/:id', (request,response) =>{
+  jsonfile.readFile(FILE, (err,obj) => {
+    const pokeArray = obj.pokemon;
+    let input = request.params.id;
+    let editPokemon = request.body;
+    for(let i=0; i<pokeArray.length;i++){
+      if(pokeArray[i].id === parseInt(input,10)){
+  
+        //if values not changed, revert to original
+        for(let key in editPokemon){
+          if(editPokemon[key] == ''){
+            editPokemon[key] = pokeArray[i][key];
+          }
+          //validation. if it is a number, revert back to original value
+          if(key == "name" || key == "img" || key == "candy"){
+            if(!isNaN(editPokemon[key])){
+              editPokemon[key] = pokeArray[i][key];
+              console.log(key + " cannot be a number");
+            }
+          }
+          if(key == "avg_spawns" || key == "num"){
+            if(isNaN(editPokemon[key])){
+              editPokemon[key] = pokeArray[i][key];
+              console.log(key + " cannot contain letters");
+            }
+          }
+        }
+
+        editPokemon.id = pokeArray[i].id;
+        //delete the submit key-value pair
+        delete editPokemon["submit"];
+        //update the current array with the changes
+        pokeArray[i] = editPokemon;
+
+        jsonfile.writeFile(FILE,obj,{spaces: 2},(err2) => {
+          //redirect to the id page
+          response.redirect(input);
+        });
+      }
+    }
+  });
+
+})
+
+app.delete('/:id', (request,response) => {
+  console.log('test');
+  jsonfile.readFile(FILE,(err,obj) => {
+    console.log('test');
+    const pokeArray = obj.pokemon;
+    let input = request.params.id;
+
+    for(let i=0; i<pokeArray.length;i++){
+      if(pokeArray[i].id === parseInt(input,10)){
+        console.log(pokeArray[i]);
+        pokeArray.splice(i,1);
+        console.log(pokeArray[i]);
+      }
+    }
+
+    response.render('home',{ pokemon: obj.pokemon });
+  })
+})
 
 /**
  * ===================================
