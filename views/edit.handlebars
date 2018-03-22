@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Create New Pokemon Form</title>
+  <title>Edit Pokemon Stats Form</title>
 
   <link rel="stylesheet" href="/css/style.css">
 
@@ -13,46 +14,23 @@
 </head>
 
 <body>
-  <!-- <form class="pokemon-form" method="POST" action="/">
-    <div class="pokemon-attribute">
-      id:<input name="id" type="text"/>
-    </div>
-    <div class="pokemon-attribute">
-      num:<input name="num" type="text"/>
-    </div>
-    <div class="pokemon-attribute">
-      name:<input name="name" type="text"/>
-    </div>
-    <div class="pokemon-attribute">
-      img:<input name="img" type="text"/>
-    </div>
-    <div class="pokemon-attribute">
-      height:<input name="height" type="text"/>
-    </div>
-    <div class="pokemon-attribute">
-      weight:<input name="weight" type="text"/>
-    </div>
-    <button name="submit" type="submit" value="Submit"></button>
-  </form> -->
-
-  <form class="needs-validation" method="POST" action="/" novalidate>
+  <form class="needs-validation" method="POST" action="/:id?_method=PUT" novalidate>
     <div class="form-row">
       <!-- Pokemon Id Field - Readonly -->
       <div class="col-md-3 mb-3">
         <label for="validationCustom01">Pokemon Id</label>
-        <input name="id" type="text" class="form-control" id="validationCustom01" placeholder="Enter pokemon id" required/>
-        <div class="invalid-feedback">
-          Please choose a Pokemon Id.
+        <input name="id" type="text" value= {{pokemon.id}} readonly/>
+        <div class="valid-feedback">
+          Looks good!
         </div>
       </div>
 
       <!-- Pokemon Num Field - Readonly -->
       <div class="col-md-3 mb-3">
         <label for="validationCustom02">Pokemon Num</label>
-        <input name="num" type="text" class="form-control" id="validationCustom02" placeholder="Enter pokemon num" required/>
-        <!-- <input name="num" type="text" value= {{pokemon.num}} readonly/> -->
-        <div class="invalid-feedback">
-          Please choose a Pokemon Num.
+        <input name="num" type="text" value= {{pokemon.num}} readonly/>
+        <div class="valid-feedback">
+          Looks good!
         </div>
       </div>
 
