@@ -6,15 +6,52 @@ body {
   align-items: center;
 }
 
-.details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 30px;
+#pokedex-section {
+  width: 90vw;
+  max-width: 1800px;
+}
+/*---Navbar style---*/
+nav {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .option {
   text-decoration-line: none;
   border: 1px solid #DDDDDD;
+  border-radius: 25%;
   padding: 5px;
-  margin: 0 20px 20px 20px;
+  margin-right: 20px;
 }
+
+input[type=text]{
+  font-family: 'Share Tech Mono',
+  monospace;
+}
+/*---Navbar style---*/
+
+/*---Grid style---*/
+.details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+  margin-top: 30px;
+}
+
+.detailsDiv > p {
+  text-align: center;
+}
+
+.detailsDiv > h5 {
+  text-align: center;
+}
+
+.pokeDiv {
+  justify-self: center;
+}
+/*---Grid style---*/
+
+/*---Pokemon page style---*/
+
+
+
+/*---Pokemon page style---*/

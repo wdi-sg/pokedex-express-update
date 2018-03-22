@@ -1,4 +1,4 @@
-<ul class="pokemon-list">
+{{!-- <ul class="pokemon-list">
   <li class="pokemon-attribute">
     id: {{pokemon.id}}
   </li>
@@ -32,11 +32,61 @@
   <li class="pokemon-attribute">
     spawn_time: {{pokemon.spawn_time}}
   </li>
-  <form action='/{{pokemon.id}}/delete' method="post">
-    <input type="submit" value="delete pokemon">
-  </form>
-  <form action="/{{pokemon.id}}/edit" method="get">
-    <input type="submit" value="Edit">
-  </form>
-  {{!-- <a href="/{{pokemon.id}}/delete">Delete Pokemon</a> --}}
-</ul>
+  <div id="actionbar">
+    <form action='/{{pokemon.id}}/delete' method="post">
+      <input type="submit" value="delete pokemon">
+    </form>
+    <form action="/{{pokemon.id}}/edit" method="get">
+      <input type="submit" value="Edit">
+    </form>
+  </div>
+  
+  <a href="/{{pokemon.id}}/delete">Delete Pokemon</a>
+</ul> --}}
+<div id="pokeDetail">
+  <div id="img">
+    <img src={{pokemon.img}}>
+  </div>
+  <div>
+    <ul>
+      <li class="pokemon-attribute">
+        id: {{pokemon.id}}
+      </li>
+      <li class="pokemon-attribute">
+        num: {{pokemon.num}}
+      </li>
+      <li class="pokemon-attribute">
+        name: {{pokemon.name}}
+      </li>
+      <li class="pokemon-attribute">
+        height: {{pokemon.height}}
+      </li>
+      <li class="pokemon-attribute">
+        weight: {{pokemon.weight}}
+      </li>
+      <li class="pokemon-attribute">
+        candy: {{pokemon.candy}}
+      </li>
+      <li class="pokemon-attribute">
+        candy_count: {{pokemon.candy_count}}
+      </li>
+      <li class="pokemon-attribute">
+        egg: {{pokemon.egg}}
+      </li>
+      <li class="pokemon-attribute">
+        avg_spawns: {{pokemon.avg_spawns}}
+      </li>
+      <li class="pokemon-attribute">
+        spawn_time: {{pokemon.spawn_time}}
+      </li>
+    </ul>
+  </div>
+  <div id="actionbar">
+    <form action='/{{pokemon.id}}/delete' method="post">
+      <input type="submit" value="delete pokemon">
+    </form>
+    <form action="/{{pokemon.id}}/edit" method="get">
+      <input type="submit" value="Edit">
+    </form>
+  </div>
+</div>
