@@ -1881,15 +1881,6 @@
       "egg": "Not in Eggs",
       "avg_spawns": 0,
       "spawn_time": "N/A"
-    },
-    {
-      "id": 152,
-      "num": "152",
-      "name": "Unown",
-      "img": "https://cdn.bulbagarden.net/upload/7/77/201Unown.png",
-      "height": "0.5 m",
-      "weight": "5 kg",
-      "submit": ""
     }
   ]
 }
