@@ -24,6 +24,28 @@
     <li class="pokemon-attribute">
       weight: {{pokemon.weight}}
     </li>
+    <li class="pokemon-attribute">
+      candy: {{pokemon.candy}}
+    </li>
+    <li class="pokemon-attribute">
+      candy_count: {{pokemon.candy_count}}
+    </li>
+    <li class="pokemon-attribute">
+      egg: {{pokemon.egg}}
+    </li>
+    <li class="pokemon-attribute">
+      avg_spawn: {{pokemon.avg_spawns}}
+    </li>
+    <li class="pokemon-attribute">
+      spawn_time: {{pokemon.spawn_time}}
+    </li>
   </ul>
+
+  <form method="POST" action="/{{pokemon.id}}?_method=DELETE">
+    <input type="submit" value="Delete">
+  </form>
+  <form method="GET" action="/{{pokemon.id}}/edit">
+    <input type="submit" value="Edit">
+  </form>
 </body>
 </html>

@@ -34,6 +34,23 @@ app.get('/new', (request, response) => {
   response.render('new');
 });
 
+app.get('/:id/edit',(request,response) => {
+  jsonfile.readFile(FILE, (err,obj) => {
+    const input = request.params.id;
+    console.log("inputted:" + input);
+    const pokeArray = obj.pokemon;
+    for(let i=0; i<pokeArray.length; i++){
+      if(pokeArray[i].id == input){
+        let context = {
+          getPokemon : pokeArray[i]
+        }
+        console.log(context);
+        response.render('edit',context);
+      }
+    }
+  })
+});
+
 app.get('/:id', (request, response) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) console.error(err);
@@ -84,6 +101,104 @@ app.post('/', (request, response) => {
     });
   });
 });
+
+app.put('/:id', (request,response) =>{
+  jsonfile.readFile(FILE, (err,obj) => {
+    const pokeArray = obj.pokemon;
+    let input = request.params.id;
+    let editPokemon = request.body;
+    for(let i=0; i<pokeArray.length;i++){
+      if(pokeArray[i].id === parseInt(input,10)){
+  
+        //if values not changed, revert to original
+        for(let key in editPokemon){
+          if(editPokemon[key] == ''){
+            editPokemon[key] = pokeArray[i][key];
+          }
+          //validation. if it is a number, revert back to original value
+          if(key == "name" || key == "img" || key == "candy"){
+            if(!isNaN(editPokemon[key])){
+              editPokemon[key] = pokeArray[i][key];
+              console.log(key + " cannot be a number");
+            }
+          }
+          if(key == "avg_spawns" || key == "num"){
+            if(isNaN(editPokemon[key])){
+              editPokemon[key] = pokeArray[i][key];
+              console.log(key + " cannot contain letters");
+            }
+          }
+          if(key == "spawn_time"){
+            let check = checkTime(editPokemon[key]);
+            if(check == false){
+              editPokemon[key] = pokeArray[i][key];
+              console.log("Invalid time format");
+            }
+          }
+        }
+
+        editPokemon.id = pokeArray[i].id;
+        //delete the submit key-value pair
+        delete editPokemon["submit"];
+        //update the current array with the changes
+        pokeArray[i] = editPokemon;
+
+        jsonfile.writeFile(FILE,obj,{spaces: 2},(err2) => {
+          //redirect to the id page
+          response.redirect(input);
+        });
+      }
+    }
+  });
+
+});
+
+app.delete('/:id', (request,response) => {
+  jsonfile.readFile(FILE,(err,obj) => {
+    const pokeArray = obj.pokemon;
+    let input = request.params.id;
+
+    for(let i=0; i<pokeArray.length;i++){
+      if(pokeArray[i].id === parseInt(input,10)){
+        console.log("before deletion: " + pokeArray[i]);
+        pokeArray.splice(i,1);
+        console.log("after deletion: " + pokeArray[i]);
+      }
+    }
+
+    jsonfile.writeFile(FILE,obj,{spaces: 2},(err2) => {
+      //redirect to the id page
+      response.render('home',{ pokemon: obj.pokemon });
+    });
+  })
+});
+
+/**
+ * ===================================
+ * Helper functions
+ * ===================================
+ */
+
+function checkTime(time){
+  let exp = /^(\d{1,2}):(\d{2})([ap]m)?$/;
+
+  //search a string for match against regular expression
+  //if it matches means it is in time format
+  if(checkT = time.match(exp)){
+    //check if the time format is valid
+    //digits before and after the :
+    if(checkT[1]<0||checkT[1]>59||checkT[2]<0||checkT[2]>59){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  //does not match time format
+  else{
+    return false;
+  }
+};
 
 /**
  * ===================================
