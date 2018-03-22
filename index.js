@@ -129,6 +129,13 @@ app.put('/:id', (request,response) =>{
               console.log(key + " cannot contain letters");
             }
           }
+          if(key == "spawn_time"){
+            let check = checkTime(editPokemon[key]);
+            if(check == false){
+              editPokemon[key] = pokeArray[i][key];
+              console.log("Invalid time format");
+            }
+          }
         }
 
         editPokemon.id = pokeArray[i].id;
@@ -145,7 +152,7 @@ app.put('/:id', (request,response) =>{
     }
   });
 
-})
+});
 
 app.delete('/:id', (request,response) => {
   console.log('test');
@@ -164,7 +171,34 @@ app.delete('/:id', (request,response) => {
 
     response.render('home',{ pokemon: obj.pokemon });
   })
-})
+});
+
+/**
+ * ===================================
+ * Helper functions
+ * ===================================
+ */
+
+function checkTime(time){
+  let exp = /^(\d{1,2}):(\d{2})([ap]m)?$/;
+
+  //search a string for match against regular expression
+  //if it matches means it is in time format
+  if(checkT = time.match(exp)){
+    //check if the time format is valid
+    //digits before and after the :
+    if(checkT[1]<0||checkT[1]>59||checkT[2]<0||checkT[2]>59){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  //does not match time format
+  else{
+    return false;
+  }
+};
 
 /**
  * ===================================
