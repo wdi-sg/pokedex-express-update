@@ -6,6 +6,7 @@ const FILE = 'pokedex.json';
 
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+// app.use(methodOverride('_method'));
 
 /**
  * ===================================
@@ -23,12 +24,60 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(bodyParser.json());
 
 /**
  * ===================================
  * Routes
  * ===================================
  */
+app.get('/:id/edit', (request, response) => {
+  let context = {};
+
+  jsonfile.readFile(FILE, (err, obj) => {
+
+    for (let i = 0; i < obj.pokemon.length; i++) {
+      if (request.params.id == obj.pokemon[i].id) {
+        context.id = obj.pokemon[i].id;
+        context.num = obj.pokemon[i].num;
+        context.name = obj.pokemon[i].name;
+        context.img = obj.pokemon[i].img;
+        context.height = obj.pokemon[i].height;
+        context.weight = obj.pokemon[i].weight;
+        context.candy = obj.pokemon[i].candy;
+        context.candy_count = obj.pokemon[i].candy_count;
+        context.egg = obj.pokemon[i].egg;
+        context.avg_spawns = obj.pokemon[i].avg_spawns;
+        context.spawn_time = obj.pokemon[i].spawn_time;
+        // console.log('context');
+        // console.log(context);
+      }
+    }
+    // console.log(context);
+    response.render('edit', context);
+  });
+});
+
+app.put('/:id', updatePokemon);
+
+function updatePokemon(request, response) {
+  console.log(request.body);
+  jsonfile.readFile(FILE, (err, obj) => {
+    console.log(request.params.id);
+    for (let i = 0; i < obj.pokemon.length; i++) {
+      if (request.params.id == obj.pokemon[i].id) {
+
+        jsonfile.writeFile('data.json', request.body, (err) => {
+          console.error(err)
+
+          // now look inside your json file
+          response.send(request.body);
+        });
+      }
+    }
+  });
+};
+
 app.get('/new', (request, response) => {
   // send response with some data (a HTML file)
   response.render('new');

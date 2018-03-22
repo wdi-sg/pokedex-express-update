@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/{{id}}?_method=PUT" method="POST">
+    <h3>Edit Pokemon</h3>
+    <img src="{{img}}" alt="{{name}}"><br>
+    Pokemon ID:
+    <div><input type="text" name="id" value="{{id}}"></div><br>
+    Pokemon Number:
+    <div><input type="text" name="num" value="{{num}}"></div><br>
+    Pokemon Name:
+    <div><input type="text" name="name" value="{{name}}"></div><br>
+    Pokemon Image:
+    <div><input type="text" name="img" value="{{img}}"></div><br>
+    Pokemon Height:
+    <div><input type="text" name="height" value="{{height}}"></div><br>
+    Pokemon Weight:
+    <div><input type="text" name="weight" value="{{weight}}"></div><br>
+    Pokemon Candy:
+    <div><input type="text" name="candy" value="{{candy}}"></div><br>
+    Candy Count:
+    <div><input type="text" name="candy_count" value="{{candy_count}}"></div><br>
+    Pokemon Egg:
+    <div><input type="text" name="egg" value="{{egg}}"></div><br>
+    Average Spawns:
+    <div><input type="text" name="avg_spawns" value="{{avg_spawns}}"></div><br>
+    Spawn Time:
+    <div><input type="text" name="spawn_time" value="{{spawn_time}}"></div><br>
+    <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
