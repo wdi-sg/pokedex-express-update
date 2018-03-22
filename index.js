@@ -29,79 +29,45 @@ app.use(methodOverride('_method'));
  * Route Handlers
  * ===================================
  */
-// Helper functions
-function getPokemonById(id) {
-	return new Promise(function(resolve, reject){
-		jsonfile.readFile(FILE, (err, obj) => {
-			if (err) {
-				reject(err);
-			};
-			let result = obj.pokemon.find((creature) => {
-				return (parseInt(creature.id) === parseInt(id));
-			});
-			resolve(result);
-		});
-	})
-};
-
-function savePokemonById(id, pokemonToSave) {
-	return new Promise(function(resolve,reject) {
-		jsonfile.readFile(FILE, (err, obj) => {
-			let index = obj.pokemon.findIndex((creature) => {
-				return creature.id == id;
-			})
-			obj.pokemon[index] = pokemonToSave;
-			jsonfile.writeFile(FILE, obj, {spaces: 4}, (err) => {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(obj);
-				}
-			})
-		})
-	})
-}
-
-function deletePokemonById(id) {
-	return new Promise(function(resolve,reject) {
-		jsonfile.readFile(FILE, (err, obj) => {
-			let index = obj.pokemon.findIndex((creature) => {
-				return creature.id == id;
-			})
-			obj.pokemon.splice(index, 1);
-			jsonfile.writeFile(FILE, obj, {spaces: 4}, (err) => {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(obj);
-				}
-			})
-		})
-	})
-}
-
 function editRoute(request, response) {
 	let id = request.params.id;
-	// Because file reading is an async function, use a Promise so that the rendering will be done only when the file read is complete, otherwise you won't get the data from the file at all!
-	getPokemonById(id).then((pokemonInfo) => {
-		response.render('edit', {pokemon: pokemonInfo});
+	jsonfile.readFile(FILE, (err, obj) => {
+		if (err) {console.error(err)};
+		let result = obj.pokemon.find((creature) => {
+			return (parseInt(creature.id) === parseInt(id));
+		});
+		response.render('edit', {pokemon: result});
 	});
-}
+};
 
 function updatePokemon(request, response) {
-	let pokemon = request.body;
+	let pokemonToSave = request.body;
 	let id = request.params.id;
-	savePokemonById(id, pokemon).then((obj) => {
-		response.render('home', {pokemon: obj.pokemon})
-	})
-}
+	jsonfile.readFile(FILE, (err, obj) => {
+		let index = obj.pokemon.findIndex((creature) => {
+			return parseInt(creature.id) == parseInt(id);
+		});
+		obj.pokemon[index] = pokemonToSave;
+		jsonfile.writeFile(FILE, obj, {spaces: 4}, (err) => {
+			if (err) {console.error(error)};
+			response.render('home', {pokemon: obj.pokemon});
+		});
+	});
+};
 
 function deletePokemon(request, response) {
 	let id = request.params.id;
-	deletePokemonById(id).then((obj) => {
-		response.render('home', {pokemon: obj.pokemon})
-	})
-}
+	jsonfile.readFile(FILE, (err, obj) => {
+		let index = obj.pokemon.findIndex((creature) => {
+			return parseInt(creature.id) == parseInt(id);
+		});
+		obj.pokemon.splice(index, 1);
+		jsonfile.writeFile(FILE, obj, {spaces: 4}, (err) => {
+			if (err) {console.error(err)};
+			response.render('home', {pokemon: obj.pokemon});
+		});
+	});
+;};
 
 /**
  * ===================================
