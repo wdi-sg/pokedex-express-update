@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Document</title>
+</head>
+
+<body>
+      {{!-- remember to put the method override parameter in the form action --}}
+      <form class="pokemon-form" method="POST" action="/{{currentId}}?_method=PUT">
+            <div class="pokemon-attribute">
+                  id:<input name="id" type="text" value="{{currentId}}"/>
+            </div>
+            <div class="pokemon-attribute">
+                  num:<input name="num" type="text" value="{{currentNum}}"/>
+            </div>
+            <div class="pokemon-attribute">
+                  name:<input name="name" type="text" value="{{currentName}}"/>
+            </div>
+            <div class="pokemon-attribute">
+                  img:<input name="img" type="text" value="{{currentImg}}"/>
+            </div>
+            <div class="pokemon-attribute">
+                  height:<input name="height" type="text" value="{{currentHeight}}"/>
+            </div>
+            <div class="pokemon-attribute">
+                  weight:<input name="weight" type="text" value="{{currentWeight}}"/>
+            </div>
+            <input name="submit" type="submit" value="Edit this pokemon!"/>
+      </form>
+</body>
+
+</html>
