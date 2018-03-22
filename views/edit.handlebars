@@ -41,6 +41,7 @@
             var result = false
             var height = heightField.value.substr(0, heightField.value.length-2);
             var weight = weightField.value.substr(0, weightField.value.length-3);
+            
             if (parseInt(idField.value) != idField.value) {
                 //invalid id
                 errorMessage += '\u2022 id\n';
@@ -83,6 +84,20 @@
                 // invalid spawn time
                 errorMessage += '\u2022 spawn time\n';
                 result = true;
+            }
+            if (idField.value == '' ||
+                numField.value == '' ||
+                nameField.value == '' ||
+                imgField.value == '' ||
+                heightField.value == '' ||
+                weightField.value == '' ||
+                candyField.value == '' ||
+                candyCountField.value == '' ||
+                eggField.value == '' ||
+                avgSpawnsField.value == '' ||
+                spawnTimeField.value == '') {
+                    errorMessage = 'Please field in all the values!'
+                    result = true;
             }
             alert(errorMessage);
             return result;
