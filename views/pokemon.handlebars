@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Pokemon</title>
 </head>
+
 <body>
   <ul class="pokemon-list">
     <li class="pokemon-attribute">
@@ -25,5 +27,12 @@
       weight: {{pokemon.weight}}
     </li>
   </ul>
+  <form method="POST" action="/{{currentId}}?_method=DELETE">
+    <input type="submit" value="Delete this pokemon!">
+  </form>
+  <br>
+  {{!-- Qn 6 --}}
+  <a href="/{{currentId}}/edit">Edit this pokemon!</a>
 </body>
+
 </html>
