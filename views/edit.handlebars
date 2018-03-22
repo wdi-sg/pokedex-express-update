@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit pokemon</title>
+</head>
+<body>
+    <form method="POST" action="/{{pokemon.id}}?_method=PUT">
+        <label for="id">Id: </label><input id="id" type="text" name="id" value="{{pokemon.id}}"><br>
+        <label for="num">Num: </label><input id="num" type="text" name="num" value="{{pokemon.num}}"><br>
+        <label for="name">Name: </label><input id="name" type="text" name="name" value="{{pokemon.name}}"><br>
+        <label for="img">Image: </label><input id="img" type="text" name="img" value="{{pokemon.img}}"><br>
+        <label for="height">Height: </label><input id="height" type="text" name="height" value="{{pokemon.height}}"><br>
+        <label for="weight">Weight: </label><input id="weight" type="text" name="weight" value="{{pokemon.weight}}"><br>
+        <label for="candy">Candy: </label><input id="candy" type="text" name="candy" value="{{pokemon.candy}}"><br>
+        <label for="candy_count">Candy Count: </label><input id="candy_count"  type="candy_count" name="candy_count" value="{{pokemon.candy_count}}"><br>
+        <label for="egg">Egg: </label><input id="egg" type="text" name="egg" value="{{pokemon.egg}}"><br>
+        <label for="avg_spawns">Average Spawns: </label><input id="avg_spawns" type="text" name="avg_spawns" value="{{pokemon.avg_spawns}}"><br>
+        <label for="spawn_time">Spawn Time: </label><input id="spawn_time" type="text" name="spawn_time" value="{{pokemon.spawn_time}}"><br>
+        <input id="btn-submit" type="submit" name="submit" value="Save">
+    </form>
+    <script>
+        var btnSubmit = document.querySelector('#btn-submit');
+
+        var idField = document.querySelector('#id');
+        var numField = document.querySelector('#num');
+        var nameField = document.querySelector('#name');
+        var imgField = document.querySelector('#img');
+        var heightField = document.querySelector('#height');
+        var weightField = document.querySelector('#weight');
+        var candyField = document.querySelector('#candy');
+        var candyCountField = document.querySelector('#candy_count');
+        var eggField = document.querySelector('#egg');
+        var avgSpawnsField = document.querySelector('#avg_spawns');
+        var spawnTimeField = document.querySelector('#spawn_time');
+
+        function isFormInvalid () {
+            var errorMessage = 'Invalid: \n';
+            var result = false
+            var height = heightField.value.substr(0, heightField.value.length-2);
+            var weight = weightField.value.substr(0, weightField.value.length-3);
+            
+            if (parseInt(idField.value) != idField.value) {
+                //invalid id
+                errorMessage += '\u2022 id\n';
+                result = true;
+            }
+            if (parseInt(numField.value) != numField.value) {
+                //invalid num
+                errorMessage += '\u2022 num\n';
+                result = true;
+            }
+            try {
+                new URL(imgField.value);
+            } catch (err) {
+                //invalid URL for img
+                errorMessage += '\u2022 URL for image\n';
+                result = true;
+            }
+            if (parseFloat(height) != height) {
+                //invalid height
+                errorMessage += '\u2022 height\n';
+                result = true;
+            }
+            if (parseFloat(weight) != weight) {
+                //invalid weight
+                errorMessage += '\u2022 weight\n';
+                result = true;
+            }
+            if (parseInt(candyCountField.value) != candyCountField.value) {
+                //invalid candy count
+                errorMessage += '\u2022 candy count\n';
+                result = true;
+            }
+            if (parseFloat(avgSpawnsField.value) != avgSpawnsField.value) {
+                //invalid average spawns
+                errorMessage += '\u2022 average spawn\n';
+                result = true;
+            }
+            let a = spawnTimeField.value.split(':')
+            if (parseInt(a[0]) != a[0] || parseInt(a[1]) != a[1]) {
+                // invalid spawn time
+                errorMessage += '\u2022 spawn time\n';
+                result = true;
+            }
+            if (idField.value == '' ||
+                numField.value == '' ||
+                nameField.value == '' ||
+                imgField.value == '' ||
+                heightField.value == '' ||
+                weightField.value == '' ||
+                candyField.value == '' ||
+                candyCountField.value == '' ||
+                eggField.value == '' ||
+                avgSpawnsField.value == '' ||
+                spawnTimeField.value == '') {
+                    errorMessage = 'Please field in all the values!'
+                    result = true;
+            }
+            alert(errorMessage);
+            return result;
+        };
+
+        btnSubmit.addEventListener('click', function(event){
+            if (isFormInvalid()) {
+                event.preventDefault();
+            };
+        });
+    </script>
+</body>
+</html>
