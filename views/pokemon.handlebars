@@ -25,5 +25,8 @@
       weight: {{pokemon.weight}}
     </li>
   </ul>
+  <a href="/{{pokemon.id}}/edit">Edit Pokemon Details</a>
+  <form method="POST" action="/{{pokemon.id}}?_method=DELETE">
+  <button>Delete Pokemon</button>
 </body>
 </html>
