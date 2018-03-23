@@ -2,7 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const jsonfile = require('jsonfile');
 
-const FILE = 'pokedex.json';
+const FILE = 'data.json';
 
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -62,36 +62,51 @@ app.get('/:id/edit', (request, response) => {
 app.put('/:id', updatePokemon);
 
 function updatePokemon(request, response) {
-  console.log(request.body);
+  console.log("request" + request.body);
+  console.log("Updating in progress...");
   jsonfile.readFile(FILE, (err, obj) => {
     console.log(request.params.id);
     for (let i = 0; i < obj.pokemon.length; i++) {
       if (request.params.id == obj.pokemon[i].id) {
-
-        jsonfile.writeFile('data.json', request.body, (err) => {
-          console.error(err)
-
-          // now look inside your json file
-          response.send(request.body);
-        });
+        console.log(request.params.id);
+        obj.pokemon[i] = request.body;
+        obj.pokemon[i].id = parseInt(request.params.id);
       }
     }
+    jsonfile.writeFile(FILE, obj, { spaces: 2 }, (err) => {
+      console.error(err)
+
+      // now look inside your json file
+      console.log("Before redirecting...");
+      response.redirect('/' + request.params.id);
+      return;
+    });
   });
 };
 
 // Q4)
-// app.delete('/:id', deletePokemon);
+app.delete('/:id', deletePokemon);
 
-// function deletePokemon(request, response) {
-//   console.log(request.body);
-//   jsonfile.readFile(FILE, (err,obj) => {
-//     for ( let i = 0; i < obj.pokemon.length; i++ ){
-//       if (request.params.id == obj.pokemon[i].id) {
+function deletePokemon(request, response) {
+  console.log('enter del function');
+  console.log("type of params id => " + typeof(request.params.id));
+  jsonfile.readFile(FILE, (err, obj) => {
+    for (let i = 0; i < obj.pokemon.length; i++) {
+      if (parseInt(request.params.id, 10) == obj.pokemon[i].id) {
+        let delPokemonId = request.params.id - 1;
+        obj.pokemon.splice(delPokemonId, 1);
 
-//       }
-//     }
-//   })
-// }
+      }
+    }
+    jsonfile.writeFile(FILE, obj, { spaces: 2 }, (err) => {
+      console.error(err)
+
+      // now look inside your json file
+      response.redirect('/');
+      return;
+    });
+  });
+};
 
 app.get('/new', (request, response) => {
   // send response with some data (a HTML file)

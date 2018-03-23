@@ -21,7 +21,7 @@ The starter code in this repository builds upon the basics of the previous exerc
 
 * Expose a new PUT `/:id` endpoint that will receive the form data from the edit form, and save the updated data into `pokedex.json` file
 
-* Expose a new DELETE `/:id` endpoint that will delete the pokemon with specified `id` from the `pokedex.json` file
+* Expose a new DELETE `/:id` endpoint that will delete the pokemon with specified `id` from the `pokedex.json` file Add a button on the `pokemon.handlebars` page that says “Delete” that when clicked, sends a DELETE request to `/:id` to delete the pokemon. Upon deletion, redirect the user to the `home.handlebars` page
 
 ## Further
 
