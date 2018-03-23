@@ -25,5 +25,9 @@
       weight: {{pokemon.weight}}
     </li>
   </ul>
+  <form class="" method="POST" action="/{{pokemon.id}}?_method=DELETE">
+    <button name="submit" type="submit" value="Submit"> Delete </button>
+  </form>
+  <button type="button" value="Edit" onclick="window.location.href='/{{pokemon.id}}/edit'"> Edit </button>
 </body>
 </html>
