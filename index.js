@@ -144,7 +144,7 @@ app.post('/', (request, response) => {
       for(let i=0; i < obj.pokemon.length; i++){
 
         let currentPokemon = obj.pokemon[i];
-        if(currentPokemon.id = request.params.id);
+        if(currentPokemon.id === parseInt(request.params.id));
 
       //this is the thing we wan to delete
       obj.pokemon.splice(i,1);
