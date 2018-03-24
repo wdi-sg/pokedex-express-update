@@ -3,10 +3,10 @@
         {
             "id": 1,
             "num": "001",
-            "name": "Bulbasaro",
+            "name": "Bulbasaur",
             "img": "http://www.serebii.net/pokemongo/pokemon/001.png",
-            "height": "0.71",
-            "weight": "2000",
+            "height": "0.71 m",
+            "weight": "6.9 kg",
             "candy": "Bulbasaur Candy",
             "candy_count": "25",
             "egg": "2 km",
@@ -77,19 +77,6 @@
             "spawn_time": "13:34"
         },
         {
-            "id": 7,
-            "num": "007",
-            "name": "Squirtle",
-            "img": "http://www.serebii.net/pokemongo/pokemon/007.png",
-            "height": "0.51 m",
-            "weight": "9.0 kg",
-            "candy": "Squirtle Candy",
-            "candy_count": 25,
-            "egg": "2 km",
-            "avg_spawns": 58,
-            "spawn_time": "04:25"
-        },
-        {
             "id": 8,
             "num": "008",
             "name": "Wartortle",
@@ -139,18 +126,6 @@
             "egg": "Not in Eggs",
             "avg_spawns": 18.7,
             "spawn_time": "02:11"
-        },
-        {
-            "id": 12,
-            "num": "012",
-            "name": "Butterfree",
-            "img": "http://www.serebii.net/pokemongo/pokemon/012.png",
-            "height": "1.09 m",
-            "weight": "32.0 kg",
-            "candy": "Caterpie Candy",
-            "egg": "Not in Eggs",
-            "avg_spawns": 2.2,
-            "spawn_time": "05:23"
         },
         {
             "id": 13,

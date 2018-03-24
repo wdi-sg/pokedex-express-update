@@ -24,7 +24,7 @@ app.get('/:id/edit',(req,resp)=>{
 	let pokeToEdit = req.params.id;
 	let context={};
 	for(i=0;i<pokedex.pokemon.length;i++){
-		if(pokeToEdit==pokedex.pokemon[i].name){
+		if(pokeToEdit==pokedex.pokemon[i].id){
 			context.id=pokedex.pokemon[i].id,
 			context.name=pokedex.pokemon[i].name,
 			context.img=pokedex.pokemon[i].img,
@@ -36,23 +36,32 @@ app.get('/:id/edit',(req,resp)=>{
 });
 
 app.get('/:id/',(req,resp)=>{
-	let deleteName=req.params.id;
+	let deleteId=req.params.id;
 	jsonfile.readFile(file,(err,obj)=>{
 		let pokemon = obj.pokemon.find((currentPokemon)=>{
-			return currentPokemon.name ===deleteName;
+			return currentPokemon.id ==deleteId;
 		})
-		console.log(pokemon);
 		resp.render('pokemon',pokemon);
 	})
 });
 
-app.delete('/:id/delete',(req,resp)=>{
-	resp.send("deleted");
-})
+app.delete('/:id',(req,resp)=>{
+	let deleteId = req.body.pokeDelete;
+	console.log(deleteId);
+	jsonfile.readFile(file,(err,obj)=>{
+		for(i=0;i<obj.pokemon.length;i++){
+			if(deleteId==obj.pokemon[i].id){
+				obj.pokemon.splice(i,1);
+				jsonfile.writeFile(file,obj,{spaces: 4},(err)=>{
+				});
+				resp.render('home');
+			}
+		};
+	});	
+});
 
 app.put('/:id',(req,resp)=>{
 	let modifiedArrayNo = null;
-	console.log("changed");
 	for(i=0;i<pokedex.pokemon.length;i++){
 		if(req.body.id==pokedex.pokemon[i].id){
 			pokedex.pokemon[i].name=req.body.name;
@@ -60,7 +69,6 @@ app.put('/:id',(req,resp)=>{
 			pokedex.pokemon[i].height=req.body.height;
 			pokedex.pokemon[i].weight=req.body.weight;
 			modifiedArrayNo = i;
-			console.log("changed");
 		}
 	}
 	jsonfile.writeFile(file,pokedex,{spaces: 4},(err)=>{
@@ -68,6 +76,14 @@ app.put('/:id',(req,resp)=>{
 	resp.send(pokedex.pokemon[modifiedArrayNo]);
 });
 
+app.get('/',(req,resp)=>{
+ jsonfile.readFile(file,(err,obj)=>{
+ 	let context = {
+ 		pokemon: obj.pokemon
+ 	}
+ 	resp.render('home',context);
+ });
+});
 
 
 app.listen(3000,()=>{

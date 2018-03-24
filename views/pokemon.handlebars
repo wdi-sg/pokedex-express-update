@@ -5,8 +5,8 @@
   <title>Pokemon</title>
 </head>
 <body>
-  <form method="post" action="/?_method=Delete"">
-    <input type="text" name:id>
+  <form method="post" action="/id?_method=Delete">
+    <input type="text" name="pokeDelete">
     <input type="submit" value="Delete">
   </form>
   <ul class="pokemon-list">
@@ -29,6 +29,7 @@
       weight: {{this.weight}}
     </li>
   </ul>
+
 
 </body>
 </html>
