@@ -6,8 +6,10 @@
 </head>
 <body>
   <h1>Welcome to the online Pokedex!</h1>
-  {{#each pokemon}}
-    <li>{{this.name}}</li>
-  {{/each}}
+  <ul>
+    {{#each pokemon}}
+    <li>Name: {{this.name}} ; Id: {{this.id}}</li><a href="/{{this.id}}/edit">Edit</a>
+    {{/each}}
+  </ul>
 </body>
 </html>
