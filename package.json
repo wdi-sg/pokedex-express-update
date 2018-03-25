@@ -9,5 +9,7 @@
     "express-handlebars": "^3.0.0",
     "jsonfile": "^4.0.0",
     "method-override": "^2.3.10"
-  }
+  },
+  "repository": "https://github.com/1ung/pokedex-express-update-delete.git",
+  "author": "1ung <leewhe@hotmail.com>"
 }
