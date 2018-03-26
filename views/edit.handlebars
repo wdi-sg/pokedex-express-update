@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to the online Pokedex!</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body style="background: url('https://wallpapers.walldevil.com/wallpapers/a89/preview/pikachu-pokemon.jpg') no-repeat right bottom fixed; background-size: cover; ">
+  <div class ="listPics" style="max-width: 800px; margin:0 auto;">
+  <h1>Welcome to the online Pokedex!</h1>
+  <div style="width: 400px;">
+
+<form class="form-horizontal" method="post" action="/{{pokemon.id}}?_method=PUT"">
+
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Edit Pokemon</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="id">ID</label>  
+  <div class="col-md-8">
+  <input id="id" name="id" type="text" value = "{{pokemon.id}}" class="form-control input-md" >
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="num">Number</label>  
+  <div class="col-md-8">
+  <input id="num" name="num" type="text" class="form-control input-md"  value = "{{pokemon.num}}">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="name">Name</label>  
+  <div class="col-md-8">
+  <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="" value = "{{pokemon.name}}">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="img">Image</label>  
+  <div class="col-md-8">
+  <input id="img" name="img" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.img}}">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="height">Height</label>  
+  <div class="col-md-8">
+  <input id="height" name="height" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.height}}">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Weight</label>  
+  <div class="col-md-8">
+  <input id="weight" name="weight" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.weight}}">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Candy</label>  
+  <div class="col-md-8">
+  <input id="candy" name="candy" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.candy}}">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Candy Count</label>  
+  <div class="col-md-8">
+  <input id="candy_count" name="candy_count" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.candy_count}}">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Egg</label>  
+  <div class="col-md-8">
+  <input id="egg" name="egg" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.egg}}">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Avg Spawns</label>  
+  <div class="col-md-8">
+  <input id="avg_spawns" name="avg_spawns" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.avg_spawns}}">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-8 control-label" for="weight">Spawn Time</label>  
+  <div class="col-md-8">
+  <input id="spawn_time" name="spawn_time" type="text" placeholder="" class="form-control input-md" value = "{{pokemon.spawn_time}}">
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="form-group">
+  <div class="col-md-8">
+  <input type="submit" placeholder="" class="form-control input-md" value="Submit">
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+   </div>
+  </div>
+  </body>
+</html>

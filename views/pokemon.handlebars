@@ -25,5 +25,9 @@
       weight: {{pokemon.weight}}
     </li>
   </ul>
+    <form class="form-horizontal" method="post" action="/{{pokemon.id}}?_method=DELETE""><input type="submit" name="submit" value = "Delete This Pokemon">
+    </form>
+  <form class="form-horizontal" method="get" action="/{{pokemon.id}}/edit"><input type="submit" name="submit" value = "Edit This Pokemon">
+</form>
 </body>
 </html>
