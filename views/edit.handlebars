@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit {{name}}</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Edit {{name}}</h1>
+  <form class="pokemon-form" method="POST" action="/{{id}}?_method=PUT">
+    <div class="pokemon-attribute">
+      id:<input name="id" type="text" value="{{id}}" readonly/>
+    </div>
+    <div class="pokemon-attribute">
+      num:<input name="num" type="text" value="{{num}}" readonly/>
+    </div>
+    <div class="pokemon-attribute">
+      name:<input name="name" type="text" value="{{name}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      img:<input name="img" type="text" value="{{img}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      height:<input name="height" type="text" value="{{height}}"/>
+    </div>
+    <div class="pokemon-attribute">
+      weight:<input name="weight" type="text" value="{{weight}}"/>
+    </div>
+    <input name="submit" type="submit"/>
+  </form>
+</body>
+</html>
