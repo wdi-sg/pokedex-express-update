@@ -34,7 +34,8 @@ app.get('/new', (request, response) => {
   response.render('new');
 });
 
-app.get('/:id', (request, response) => {
+app.put('/:id', (request, response) => {
+
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) console.error(err);
 
@@ -42,6 +43,70 @@ app.get('/:id', (request, response) => {
     let inputId = request.params.id;
     let pokemon = obj.pokemon.find((currentPokemon) => {
       return currentPokemon.id === parseInt(inputId, 10);
+    });
+
+    if (pokemon === undefined) {
+      // return 404 HTML page if pokemon not found
+      response.render('404');
+    } else {
+      // return pokemon HTML page if found
+      for (let i in request.body){
+      pokemon[i] = request.body[i]
+      }
+      let context = {
+        pokemon: pokemon
+      };
+
+jsonfile.writeFile(FILE, obj, (err, obj) =>{
+console.log(err)
+})
+
+      response.render('pokemon', context);
+    }
+  });
+});
+
+app.delete('/:id', (request, response) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.error(err);
+
+    // attempt to retrieve the requested pokemon
+    let inputId = request.params.id;
+    let pokemon = obj.pokemon.find((currentPokemon) => {
+      return currentPokemon.id == parseInt(inputId, 10);
+    });
+    if (pokemon === undefined) {
+      // return 404 HTML page if pokemon not found
+      response.render('404');
+    } else {
+      // return pokemon HTML page if found
+         obj.pokemon.splice(obj.pokemon.indexOf(pokemon), 1);
+
+      let context = {
+        pokemon: pokemon
+      };
+
+jsonfile.writeFileSync(FILE, obj, (err, obj) =>{
+console.log(err)
+
+})
+
+
+    }
+  });
+      response.redirect('/');
+
+
+});
+
+app.get('/:id', (request, response) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.error(err);
+    // attempt to retrieve the requested pokemon
+    let inputId = request.params.id;
+    let pokemon = obj.pokemon.find((currentPokemon) => {
+
+      return currentPokemon.id == parseInt(inputId, 10);
     });
 
     if (pokemon === undefined) {
@@ -57,6 +122,19 @@ app.get('/:id', (request, response) => {
     }
   });
 });
+
+
+
+app.get('/:id/edit', (request, response) => {
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.error(err);
+let selectPokemon = obj.pokemon.find(x => x.id == request.params.id);
+   response.render('edit', { pokemon: selectPokemon });
+  });
+
+
+ }
+)
 
 app.get('/', (request, response) => {
   jsonfile.readFile(FILE, (err, obj) => {
