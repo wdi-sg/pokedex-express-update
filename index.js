@@ -1,9 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const jsonfile = require('jsonfile');
-
 const FILE = 'pokedex.json';
-
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
@@ -32,6 +30,31 @@ app.use(methodOverride('_method'));
 app.get('/new', (request, response) => {
   // send response with some data (a HTML file)
   response.render('new');
+});
+
+
+app.get('/:id/edit', (request,response) => {
+
+  jsonfile.readFile(FILE, (err, obj) => {
+    if (err) console.error(err);
+
+    // attempt to retrieve the requested pokemon
+    let inputId = request.params.id;
+    let pokemon = obj.pokemon.find((currentPokemon) => {
+      return currentPokemon.id === parseInt(inputId, 10);
+    });
+
+    console.log(pokemon);
+    if (pokemon === undefined) {
+      // return 404 HTML page if pokemon not found
+      response.render('404');
+    } else {
+      // return pokemon HTML page if found
+      let context = pokemon;
+      response.render('edit', context);
+    }
+  });
+
 });
 
 app.get('/:id', (request, response) => {
@@ -67,6 +90,7 @@ app.get('/', (request, response) => {
   });
 });
 
+
 app.post('/', (request, response) => {
   jsonfile.readFile(FILE, (err, obj) => {
     if (err) console.error(err);
@@ -85,6 +109,47 @@ app.post('/', (request, response) => {
   });
 });
 
+app.put('/:id', (request, response) => {
+  jsonfile.readFile(FILE, (err,obj) => {
+    if (err) console.error(err);
+    var changes = request.body;
+    
+    //changes.id
+    for (let i=0; i<obj.pokemon.length; i++){
+      if (changes.id == obj.pokemon[i].id){
+        obj.pokemon[i].name = changes.name;
+        obj.pokemon[i].img = changes.img;
+        obj.pokemon[i].height = changes.height;
+        obj.pokemon[i].weight = changes.weight;
+      }
+    }
+    console.log(obj.pokemon[id]);
+  jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+      response.render('pokemon', {pokemon:changes});
+    });
+  });
+});
+
+app.delete('/:id', (request, response) => {
+  jsonfile.readFile(FILE, (err,obj) => {
+    if (err) console.error(err);
+    
+    let id = request.params.id;
+
+    //changes.id
+    for (let i=0; i<obj.pokemon.length; i++){
+      if ( id == obj.pokemon[i].id){
+        obj.pokemon.splice(i,1);
+      }
+    }
+
+  jsonfile.writeFile(FILE, obj, (err2) => {
+      if (err2) console.error(err2);
+      response.render('home', {pokemon : obj.pokemon});
+    });
+  });
+});
 /**
  * ===================================
  * Listen to requests on port 3000
